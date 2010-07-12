@@ -1,4 +1,3 @@
-using System.Data;
 using Castle.Windsor;
 using NHibernate;
 using NUnit.Framework;

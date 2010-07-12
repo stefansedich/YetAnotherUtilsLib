@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using NHibernate;
 using NUnit.Framework;
 using Rhino.Mocks;
@@ -48,6 +49,27 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
 
             // Assert
             Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void GetAll_Fetches_All_Using_Current_Session()
+        {
+            // Arrange
+            var items = new List<TestEntity> {new TestEntity(), new TestEntity()};
+
+            var criteria = MockRepository.GenerateStub<ICriteria>();
+
+            _session.Stub(sess => sess.CreateCriteria(typeof (TestEntity)))
+                .Return(criteria);
+
+            criteria.Stub(crit => crit.List<TestEntity>())
+                .Return(items);
+
+            // Act
+            var result = _repository.GetAll();
+
+            // Assert
+            Assert.AreEqual(items, result);
         }
 
         [Test]
