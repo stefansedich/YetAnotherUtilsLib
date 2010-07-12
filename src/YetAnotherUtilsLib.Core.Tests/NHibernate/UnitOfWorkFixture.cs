@@ -109,7 +109,6 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
         {
             // Arrange
             var uow = new UnitOfWork(_session, _transaction);
-
             UnitOfWorkFactory.SetGlobalUnitOfWork(uow);
 
             Assert.IsNotNull(UnitOfWorkFactory.CurrentUnitOfWork);
@@ -119,6 +118,7 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
 
             // Assert
             Assert.IsNull(UnitOfWorkFactory.CurrentUnitOfWork);
+            UnitOfWorkFactory.SetGlobalUnitOfWork(null);
         }
 
         [Test]

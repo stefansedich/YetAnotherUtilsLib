@@ -1,3 +1,4 @@
+using System;
 using NHibernate;
 using YetAnotherUtilsLib.Core.Common;
 
@@ -27,6 +28,9 @@ namespace YetAnotherUtilsLib.Core.NHibernate
         
         public IUnitOfWork Create()
         {
+            if(CurrentUnitOfWork != null)
+                throw new InvalidOperationException("Cannot create a UnitOfWork while another is running");
+
             var session = _sessionFactoryBuilder.BuildSessionFactory().OpenSession();
             session.FlushMode = FlushMode.Commit;
 

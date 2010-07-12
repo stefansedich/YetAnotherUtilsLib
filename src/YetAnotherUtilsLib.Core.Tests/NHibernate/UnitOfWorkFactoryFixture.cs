@@ -1,6 +1,5 @@
-using System.Data;
+using System;
 using NHibernate;
-using NHibernate.Transaction;
 using NUnit.Framework;
 using Rhino.Mocks;
 using YetAnotherUtilsLib.Core.NHibernate;
@@ -36,14 +35,15 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
             // Arrange
 
             // Act
-            var uow = _factory.Create();
+            using (var uow = _factory.Create())
+            {
+                // Assert
+                _session.AssertWasCalled(sess => sess.BeginTransaction());
 
-            // Assert
-            _session.AssertWasCalled(sess => sess.BeginTransaction());
-
-            Assert.IsNotNull(uow);
-            Assert.AreEqual(FlushMode.Commit, _session.FlushMode);
-            Assert.AreEqual(uow.CurrentSession, _session);
+                Assert.IsNotNull(uow);
+                Assert.AreEqual(FlushMode.Commit, _session.FlushMode);
+                Assert.AreEqual(uow.CurrentSession, _session);
+            }
         }
         
         [Test]
@@ -52,10 +52,26 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
             // Arrange
 
             // Act
-            var uow = _factory.Create();
+            using (var uow = _factory.Create())
+            {
+                // Assert
+                Assert.AreEqual(uow, UnitOfWorkFactory.CurrentUnitOfWork);
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void Create_Throws_If_UnitOfWork_Already_Running()
+        {
+            // Arrange
+            
+            // Act
+            using(_factory.Create())
+            {
+                _factory.Create();
+            }
 
             // Assert
-            Assert.AreEqual(uow, UnitOfWorkFactory.CurrentUnitOfWork);
         }
     }
 }

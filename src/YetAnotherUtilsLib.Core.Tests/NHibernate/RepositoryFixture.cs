@@ -17,6 +17,7 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
         [SetUp]
         public void SetUp()
         {
+            _repository = new TestRepository();
             _unitOfWork = MockRepository.GenerateStub<IUnitOfWork>();
             _session = MockRepository.GenerateStub<ISession>();
 
@@ -24,8 +25,12 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
                 .Return(_session);
 
             UnitOfWorkFactory.SetGlobalUnitOfWork(_unitOfWork);
+        }
 
-            _repository = new TestRepository();
+        [TearDown]
+        public void TearDown()
+        {
+            UnitOfWorkFactory.SetGlobalUnitOfWork(null);
         }
 
         [Test]
@@ -49,7 +54,6 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
         public void Insert_Saves_Using_Current_Session()
         {
             // Arrange
-            var id = Guid.NewGuid();
             var entity = new TestEntity();
             
             // Act
@@ -63,7 +67,6 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
         public void Update_Updates_Using_Current_Session()
         {
             // Arrange
-            var id = Guid.NewGuid();
             var entity = new TestEntity();
 
             // Act
@@ -77,7 +80,6 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
         public void Delete_Deletes_Using_Current_Session()
         {
             // Arrange
-            var id = Guid.NewGuid();
             var entity = new TestEntity();
 
             // Act
