@@ -1,4 +1,6 @@
+using System.Data;
 using NHibernate;
+using NHibernate.Transaction;
 using NUnit.Framework;
 using Rhino.Mocks;
 using YetAnotherUtilsLib.Core.NHibernate;
@@ -43,7 +45,7 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
             Assert.AreEqual(FlushMode.Commit, _session.FlushMode);
             Assert.AreEqual(uow.CurrentSession, _session);
         }
-
+        
         [Test]
         public void Create_Sets_CurrentUnitOfWork_To_Started_UnitOfWork()
         {

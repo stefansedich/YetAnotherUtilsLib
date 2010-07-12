@@ -1,3 +1,4 @@
+using System.Data;
 using NHibernate;
 using YetAnotherUtilsLib.Core.Common;
 
@@ -24,12 +25,12 @@ namespace YetAnotherUtilsLib.Core.NHibernate
         {
             _sessionFactoryBuilder = sessionFactoryBuilder;
         }
-
+        
         public IUnitOfWork Create()
         {
             var session = _sessionFactoryBuilder.BuildSessionFactory().OpenSession();
             session.FlushMode = FlushMode.Commit;
-            
+
             return (CurrentUnitOfWork = new UnitOfWork(session, session.BeginTransaction()));
         }
 
