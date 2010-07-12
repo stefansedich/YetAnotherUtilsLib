@@ -21,10 +21,8 @@ namespace YetAnotherUtilsLib.Core.Mvc
             {
                 if (noExceptions && modelValid)
                     _unitOfWork.Commit();
-            }
-            catch
-            {
-                _unitOfWork.Rollback();
+                else
+                    _unitOfWork.Rollback();
             }
             finally
             {
