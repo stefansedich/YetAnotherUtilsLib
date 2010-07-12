@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YetAnotherUtilsLib.Core", "YetAnotherUtilsLib.Core\YetAnotherUtilsLib.Core.csproj", "{2ECA29DE-893B-407E-9B62-0AD6A150C0AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YetAnotherUtilsLib.Core.Tests", "YetAnotherUtilsLib.Core.Tests\YetAnotherUtilsLib.Core.Tests.csproj", "{693813E3-30E8-4D64-AD58-D5A28AA6B332}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2ECA29DE-893B-407E-9B62-0AD6A150C0AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ECA29DE-893B-407E-9B62-0AD6A150C0AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ECA29DE-893B-407E-9B62-0AD6A150C0AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ECA29DE-893B-407E-9B62-0AD6A150C0AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{693813E3-30E8-4D64-AD58-D5A28AA6B332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{693813E3-30E8-4D64-AD58-D5A28AA6B332}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{693813E3-30E8-4D64-AD58-D5A28AA6B332}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{693813E3-30E8-4D64-AD58-D5A28AA6B332}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
