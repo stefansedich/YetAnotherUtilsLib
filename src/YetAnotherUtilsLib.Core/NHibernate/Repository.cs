@@ -14,7 +14,7 @@ namespace YetAnotherUtilsLib.Core.NHibernate
     {
         protected ISession CurrentSession
         {
-            get { return UnitOfWork.CurrentUnitOfWork.CurrentSession; }
+            get { return UnitOfWorkFactory.CurrentUnitOfWork.CurrentSession; }
         }
 
         public TEntity Get(TKey id)

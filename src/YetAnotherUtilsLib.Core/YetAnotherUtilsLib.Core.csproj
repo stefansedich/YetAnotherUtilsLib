@@ -73,6 +73,7 @@
     <Compile Include="NHibernate\INHibernateSessionFactoryBuilder.cs" />
     <Compile Include="NHibernate\Repository.cs" />
     <Compile Include="NHibernate\UnitOfWork.cs" />
+    <Compile Include="NHibernate\UnitOfWorkFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

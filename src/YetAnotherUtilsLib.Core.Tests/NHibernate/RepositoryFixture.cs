@@ -23,7 +23,7 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
             _unitOfWork.Stub(uow => uow.CurrentSession)
                 .Return(_session);
 
-            UnitOfWork.SetGlobalUnitOfWork(_unitOfWork);
+            UnitOfWorkFactory.SetGlobalUnitOfWork(_unitOfWork);
 
             _repository = new TestRepository();
         }
