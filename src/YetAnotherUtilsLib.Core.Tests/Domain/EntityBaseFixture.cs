@@ -76,6 +76,19 @@ namespace YetAnotherUtilsLib.Core.Tests.Domain
             Assert.IsFalse(modelA.IsTransient);
         }
 
+        [Test]
+        public void GetHashCode_Returns_HashCode_Of_Id()
+        {
+            // Arrange
+            var model = new TestEnttiy {Id = Guid.NewGuid()};
+
+            // Act
+            int hashCode = model.GetHashCode();
+
+            // Assert
+            Assert.AreEqual(hashCode, model.Id.GetHashCode());
+        }
+
         internal class TestEnttiy : EntityBase<Guid> { }
         internal class TestEnttiy2 : EntityBase<Guid> { }
     }
