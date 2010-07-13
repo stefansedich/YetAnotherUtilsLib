@@ -112,6 +112,6 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
         }
 
         public class TestEntity : EntityBase<Guid> { }
-        public class TestRepository : Repository<TestEntity, Guid> { }
+        public class TestRepository : RepositoryBase<TestEntity, Guid> { }
     }
 }

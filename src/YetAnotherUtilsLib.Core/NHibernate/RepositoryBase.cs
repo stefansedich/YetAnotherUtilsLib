@@ -12,7 +12,7 @@ namespace YetAnotherUtilsLib.Core.NHibernate
         void Delete(TEntity entity);
     }
 
-    public abstract class Repository<TEntity, TKey> : IRepository<TEntity, TKey>
+    public abstract class RepositoryBase<TEntity, TKey> : IRepository<TEntity, TKey>
     {
         protected ISession CurrentSession
         {
