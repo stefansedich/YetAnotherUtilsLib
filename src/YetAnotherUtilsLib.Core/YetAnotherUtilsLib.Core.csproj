@@ -71,6 +71,9 @@
     <Compile Include="Domain\EntityBase.cs" />
     <Compile Include="Mvc\UnitOfWorkFilter.cs" />
     <Compile Include="NHibernate\INHibernateSessionFactoryBuilder.cs" />
+    <Compile Include="NHibernate\IRepository.cs" />
+    <Compile Include="NHibernate\IUnitOfWork.cs" />
+    <Compile Include="NHibernate\IUnitOfWorkFactory.cs" />
     <Compile Include="NHibernate\RepositoryBase.cs" />
     <Compile Include="NHibernate\UnitOfWork.cs" />
     <Compile Include="NHibernate\UnitOfWorkFactory.cs" />

@@ -1,18 +1,8 @@
-using System;
 using NHibernate;
 using YetAnotherUtilsLib.Core.Container;
 
 namespace YetAnotherUtilsLib.Core.NHibernate
 {
-    public interface IUnitOfWork : IDisposable
-    {
-        ISession CurrentSession { get; }
-        ITransaction CurrentTransaction { get; }
-
-        void Commit();
-        void Rollback();
-    }
-
     public class UnitOfWork : IUnitOfWork
     {
         public ISession CurrentSession { get; protected set; }

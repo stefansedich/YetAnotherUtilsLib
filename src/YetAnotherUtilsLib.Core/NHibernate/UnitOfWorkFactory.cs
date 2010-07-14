@@ -4,11 +4,6 @@ using YetAnotherUtilsLib.Core.Common;
 
 namespace YetAnotherUtilsLib.Core.NHibernate
 {
-    public interface IUnitOfWorkFactory
-    {
-        IUnitOfWork Create();
-    }
-
     public class UnitOfWorkFactory : IUnitOfWorkFactory
     {
         private const string UNIT_OF_WORK_KEY = "UnitOfWorkFactory.CurrentUnitOfWork";
