@@ -52,9 +52,15 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -69,6 +75,8 @@
     <Compile Include="Common\WebSafeCallContext.cs" />
     <Compile Include="Container\IoC.cs" />
     <Compile Include="Domain\EntityBase.cs" />
+    <Compile Include="Mvc\LowercaseRoute.cs" />
+    <Compile Include="Mvc\RouteCollectionExtensions.cs" />
     <Compile Include="Mvc\UnitOfWorkFilter.cs" />
     <Compile Include="NHibernate\INHibernateSessionFactoryBuilder.cs" />
     <Compile Include="NHibernate\IRepository.cs" />
