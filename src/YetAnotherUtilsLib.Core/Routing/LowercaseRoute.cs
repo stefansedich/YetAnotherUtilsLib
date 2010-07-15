@@ -1,6 +1,6 @@
 using System.Web.Routing;
 
-namespace YetAnotherUtilsLib.Core.Mvc
+namespace YetAnotherUtilsLib.Core.Routing
 {
     /// <summary>
     /// http://stackoverflow.com/questions/878578/how-can-i-have-lowercase-routes-in-asp-net-mvc

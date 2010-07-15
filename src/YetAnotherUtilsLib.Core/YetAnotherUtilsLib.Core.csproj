@@ -75,8 +75,8 @@
     <Compile Include="Common\WebSafeCallContext.cs" />
     <Compile Include="Container\IoC.cs" />
     <Compile Include="Domain\EntityBase.cs" />
-    <Compile Include="Mvc\LowercaseRoute.cs" />
-    <Compile Include="Mvc\RouteCollectionExtensions.cs" />
+    <Compile Include="Routing\LowercaseRoute.cs" />
+    <Compile Include="Routing\RouteCollectionExtensions.cs" />
     <Compile Include="Mvc\UnitOfWorkFilter.cs" />
     <Compile Include="NHibernate\INHibernateSessionFactoryBuilder.cs" />
     <Compile Include="NHibernate\IRepository.cs" />
