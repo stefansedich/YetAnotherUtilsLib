@@ -43,7 +43,7 @@ namespace YetAnotherUtilsLib.Core.NHibernate
             if (CurrentTransaction != null)
                 CurrentTransaction.Dispose();
 
-            UnitOfWorkFactory.CurrentUnitOfWork = null;
+            UnitOfWorkFactory.CloseCurrentUnitOfWork();
         }
     }
 }

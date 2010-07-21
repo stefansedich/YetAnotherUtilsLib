@@ -73,5 +73,23 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
 
             // Assert
         }
+
+        [Test]
+        public void CurrentUnitOfWork_Exceptions_If_UnitOfWork_Not_Started()
+        {
+            // Arrange
+            
+            try
+            {
+                // Act
+                var uow = UnitOfWorkFactory.CurrentUnitOfWork;
+                Assert.IsNotNull(uow);
+            }
+            catch(InvalidOperationException)
+            {
+                // Assert
+                // Should exception as CurrentUnitOfWork should be empty
+            }
+        }
     }
 }

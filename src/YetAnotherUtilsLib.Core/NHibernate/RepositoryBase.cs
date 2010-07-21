@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using NHibernate;
 
@@ -7,7 +8,10 @@ namespace YetAnotherUtilsLib.Core.NHibernate
     {
         protected ISession CurrentSession
         {
-            get { return UnitOfWorkFactory.CurrentUnitOfWork.CurrentSession; }
+            get
+            {
+                return UnitOfWorkFactory.CurrentUnitOfWork.CurrentSession;
+            }
         }
 
         public TEntity Get(TKey id)

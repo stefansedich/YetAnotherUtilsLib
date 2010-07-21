@@ -9,11 +9,22 @@ namespace YetAnotherUtilsLib.Core.NHibernate
         private const string UNIT_OF_WORK_KEY = "UnitOfWorkFactory.CurrentUnitOfWork";
 
         private readonly INHibernateSessionFactoryBuilder _sessionFactoryBuilder;
-        
-        public static IUnitOfWork CurrentUnitOfWork
+
+        internal static IUnitOfWork InternalCurrentUnitOfWork
         {
             get { return WebSafeCallContext.GetData(UNIT_OF_WORK_KEY) as IUnitOfWork; }
             set { WebSafeCallContext.SetData(UNIT_OF_WORK_KEY, value); }
+        }
+
+        public static IUnitOfWork CurrentUnitOfWork
+        {
+            get
+            {
+                if(InternalCurrentUnitOfWork == null)
+                    throw new InvalidOperationException("You are not currently in a UnitOfWork");
+
+                return InternalCurrentUnitOfWork;
+            }
         }
 
         public UnitOfWorkFactory(INHibernateSessionFactoryBuilder sessionFactoryBuilder)
@@ -23,18 +34,23 @@ namespace YetAnotherUtilsLib.Core.NHibernate
         
         public IUnitOfWork Create()
         {
-            if(CurrentUnitOfWork != null)
+            if (InternalCurrentUnitOfWork != null)
                 throw new InvalidOperationException("Cannot create a UnitOfWork while another is running");
 
             var session = _sessionFactoryBuilder.BuildSessionFactory().OpenSession();
             session.FlushMode = FlushMode.Commit;
 
-            return (CurrentUnitOfWork = new UnitOfWork(session, session.BeginTransaction()));
+            return (InternalCurrentUnitOfWork = new UnitOfWork(session, session.BeginTransaction()));
         }
 
         public static void SetGlobalUnitOfWork(IUnitOfWork current)
         {
-            CurrentUnitOfWork = current;
+            InternalCurrentUnitOfWork = current;
+        }
+
+        public static void CloseCurrentUnitOfWork()
+        {
+            InternalCurrentUnitOfWork = null;
         }
     }
 }

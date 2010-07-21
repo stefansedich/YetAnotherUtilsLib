@@ -1,3 +1,4 @@
+using System;
 using Castle.Windsor;
 using NHibernate;
 using NUnit.Framework;
@@ -116,8 +117,14 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
             uow.Dispose();
 
             // Assert
-            Assert.IsNull(UnitOfWorkFactory.CurrentUnitOfWork);
-            UnitOfWorkFactory.SetGlobalUnitOfWork(null);
+            try
+            {
+                Assert.IsNull(UnitOfWorkFactory.CurrentUnitOfWork);
+            }
+            catch (InvalidOperationException)
+            {
+                // Should exception as CurrentUnitOfWork is null.
+            }
         }
 
         [Test]
