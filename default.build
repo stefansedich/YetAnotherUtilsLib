@@ -1,0 +1,34 @@
+<project name="YetAnotherUtilsLib.Core" default="rebuild">
+    <!-- Build as: release, debug, etc. -->
+    <property name="configuration" value="release" />
+
+    <!-- Output directory where our executables should be written to -->
+    <property name="bin-directory" value="${directory::get-current-directory()}/build/" />
+
+    <!-- Location of the MSBuild executable, we use this to build projects -->
+    <property name="msbuild" value="${framework::get-framework-directory(framework::get-target-framework())}\MSBuild.exe" />
+        <property name="msbuild" value="${framework::get-framework-directory(framework::get-target-framework())}/xbuild.exe" if="${nant.settings.currentframework == 'mono-2.0'}" />
+
+	<target name="clean" description="Delete all previously compiled binaries.">
+        <delete dir="${bin-directory}" />            
+    </target>
+	
+    <target name="build" description="Build all application targets.">
+        <mkdir dir="${bin-directory}" />
+		
+        <exec program="${msbuild}" commandline='"src/YetAnotherUtilsLib.Core/YetAnotherUtilsLib.Core.csproj" /v:n /nologo /t:Build /p:Configuration=${configuration};OutDir="${bin-directory}"' />
+    </target>
+
+    <target name="rebuild" depends="clean, build" />
+
+    <target name="test" description="Build test project and run all tests." depends="rebuild">
+        <mkdir dir="${bin-directory}" />
+            <!-- Do not build verbosely (/v:q), user wants to see test results, not build output -->
+			<exec program="${msbuild}" commandline='"src/YetAnotherUtilsLib.Core.Tests/YetAnotherUtilsLib.Core.Tests.csproj" /v:q /nologo /t:Build /p:Configuration=Debug;OutDir="${bin-directory}"' />
+
+			<nunit2>
+				<formatter type="Plain" />
+				<test assemblyname="${bin-directory}/YetAnotherUtilsLib.Core.Tests.dll" />
+			</nunit2>
+    </target>
+</project>
