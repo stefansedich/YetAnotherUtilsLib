@@ -60,18 +60,24 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void Create_Throws_If_UnitOfWork_Already_Running()
         {
             // Arrange
             
             // Act
-            using(_factory.Create())
+            try
             {
-                _factory.Create();
-            }
+                using (_factory.Create())
+                {
+                    _factory.Create();
+                }
 
-            // Assert
+                Assert.Fail();
+            } 
+            catch(InvalidOperationException)
+            {
+                // Assert
+            }
         }
 
         [Test]
