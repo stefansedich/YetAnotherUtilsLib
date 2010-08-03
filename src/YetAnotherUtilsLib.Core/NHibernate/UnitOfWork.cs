@@ -1,3 +1,4 @@
+using System;
 using NHibernate;
 using YetAnotherUtilsLib.Core.Container;
 
@@ -18,6 +19,15 @@ namespace YetAnotherUtilsLib.Core.NHibernate
         {
             return IoC.Resolve<IUnitOfWorkFactory>()
                 .Create();
+        }
+
+        public static void Start(Action action)
+        {
+            using(var uow = Start())
+            {
+                action();
+                uow.Commit();
+            }
         }
 
         public void Commit()

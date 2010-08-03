@@ -45,6 +45,44 @@ namespace YetAnotherUtilsLib.Core.Tests.NHibernate
             // Assert
             Assert.AreEqual(unitOfWork, uow);
         }
+
+        [Test]
+        public void Start_With_Action_Auto_Commits()
+        {
+            // Arrange
+            int num = 0;
+
+            var unitOfWork = MockRepository.GenerateStub<IUnitOfWork>();
+
+            _unitOfWorkFactory.Stub(factory => factory.Create())
+                .Return(unitOfWork);
+
+            // Act
+            UnitOfWork.Start(() => num = 10);
+
+            // Assert
+            Assert.AreEqual(10, num);
+            unitOfWork.AssertWasCalled(uow => uow.Commit());
+        }
+
+        [Test]
+        public void Start_With_Failed_Action_Does_Not_Commit()
+        {
+            // Arrange
+            var unitOfWork = MockRepository.GenerateStub<IUnitOfWork>();
+
+            _unitOfWorkFactory.Stub(factory => factory.Create())
+                .Return(unitOfWork);
+
+            // Act
+            try
+            {
+                UnitOfWork.Start(() => { throw new InvalidOperationException(); });
+            } catch { }
+            
+            // Assert
+            unitOfWork.AssertWasNotCalled(uow => uow.Commit());
+        }
         
         [Test]
         public void Commit_Commits_Transaction_If_Transaction_Active()
