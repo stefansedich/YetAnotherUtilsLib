@@ -1,8 +1,7 @@
 <project name="YetAnotherUtilsLib.Core" default="rebuild">
     <!-- Build as: release, debug, etc. -->
     <property name="configuration" value="release" />
-    <property name="teamcity.dotnet.nant.nunit2.platform" value="x86" />
-    
+        
     <!-- Output directory where our executables should be written to -->
     <property name="bin-directory" value="${directory::get-current-directory()}/build/" />
 
