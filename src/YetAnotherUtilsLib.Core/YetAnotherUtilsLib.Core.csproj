@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\WebSafeCallContext.cs" />
     <Compile Include="Container\IoC.cs" />
     <Compile Include="Domain\EntityBase.cs" />
